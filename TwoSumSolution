@@ -1,0 +1,57 @@
+import java.util.* ;
+
+class Solution{
+	int[]twoSum(int number[], int target){
+		int[] num = number.clone();
+		Arrays.sort(num);
+
+
+		int length = number.length;
+		int right  = num.length - 1;
+
+		int left   = 0;
+		int sum    = 0;
+		int[] index = new int[2];
+		index[0] = 0; index[1] = 0;
+		System.out.println(index[0] + "你好" + index[1]);
+
+		while (left < right){
+			sum = num[left] + num[right];
+			System.out.println(num[left] + "" + num[right]);
+			
+			if (sum == target){
+				for (int i = 0; i < length; ++i ){
+					if (num[left] == number[i]){
+						index[0] = i + 1;
+					}
+					if (num[right] == number[i]){
+						index[1] = i + 1;
+					}
+					if (!(index[0] == 0 || index[1] == 0)) 
+						break;
+				}
+				break ;
+			}
+			else if (sum < target){
+				--left;
+			}
+			else if (sum > target){
+				--right;                            //注意逻辑
+			}
+		}
+		System.out.println("sedcond"+index[0] + index[1]);
+
+		return index;
+	}
+}
+public class  TwoSumSolution{
+	public static void main(String[] args) {
+		Solution slt = new Solution();
+
+		int[] numbers = { 11, 7, 2, 15 };  
+		int target = 9;  
+		int[] answer = slt.twoSum(numbers,target);
+
+		System.out.println(answer[0] + "" + answer[1]);//直接写answer[0] + answer[1]会显示这两个数相加之后的结果
+	}
+}
