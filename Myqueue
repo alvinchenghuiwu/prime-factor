@@ -1,0 +1,45 @@
+
+public class Myqueue<Item> {
+	private  int N;
+	private Node first;			//没有new不占空间
+	private Node oldlast;
+	private Node last;
+
+	private class Node{
+		Item item;
+		Node next;
+	}
+
+	public  boolean isEmputy(){
+		return (first == null);
+	}
+
+	public int size(){
+		return N;
+	}
+
+	public void enqueue(Item item){
+		oldlast = last;		 					//《算法》第4版中 Node oldlast = last; 能到{}的作用域外？
+		last = new Node();					//oldLast，last，first都是一个外加指引，其他的链表只有上一个Node.next指引
+		last.item = item;
+		last.next = null;
+		if (isEmputy()) {
+			first = last;						//给first赋初值
+		}else {
+			oldlast.next = last; 				//不能写在Node last = new Node的前面，会形成循环指针
+		}
+		++N;									//必须写在if(isEmupty)的后面
+	}
+	
+	public Item dequeue(){
+		Item item = first.item;
+		first = first.next;						//oldFist因为没有应用指向，所以被回收
+		--N;
+		if (isEmputy()) {							//我觉得if(isEmupty)应该放在--n的1后面,因为dequeue如果没有执
+			last = null;						//行到size()+1的话（执行到size()）,无法回收last引用
+		}										//《算法》第4版上写着是在 --n的前面
+												//疑问oldlast所指的Node和oldlast.next所指的Node如何回收？
+
+		return item;
+	}
+}
