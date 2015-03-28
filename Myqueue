@@ -19,7 +19,7 @@ public class Myqueue<Item> {
 	}
 
 	public void enqueue(Item item){
-		oldlast = last;		 					//《算法》第4版中 Node oldlast = last; 能到{}的作用域外？
+		Node oldlast = last;		 			//《算法》第4版中 Node oldlast = last; 能到{}的作用域外？ 是的，正因为自在链表结束时oldlast所指对象被回收
 		last = new Node();					//oldLast，last，first都是一个外加指引，其他的链表只有上一个Node.next指引
 		last.item = item;
 		last.next = null;
@@ -39,6 +39,7 @@ public class Myqueue<Item> {
 			last = null;						//行到size()+1的话（执行到size()）,无法回收last引用
 		}										//《算法》第4版上写着是在 --n的前面
 												//疑问oldlast所指的Node和oldlast.next所指的Node如何回收？
+												//因为Node oldlast后作用域有限，所以oldlast所指对象在enqueue结束后遍被垃圾回收
 
 		return item;
 	}
