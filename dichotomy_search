@@ -1,0 +1,61 @@
+class Mar2906 {
+	int sort(int[] array, int target){
+		int length = array.length;
+		int[] arrays = array.clone();
+
+		for (int i = 1; i < length; ++i) {
+			int key = arrays[i];
+			int j = i - 1;
+
+			while ((j >= 0) && arrays[j] > key) {
+				arrays[j+1] = arrays[j];
+				--j;
+			}
+
+			arrays[j+1] = key;
+		}
+
+		for (int x : arrays) {
+			System.out.print(x + " ");
+		}
+		System.out.println();
+
+		int max = length - 1;
+		int min = 0; 
+
+		while (min <= max) {
+			int mid = (max + min)/2;
+
+			if (target < arrays[mid]) {			//把target放在前面更易理解
+				max = mid - 1;					//由于去区域内边界不用担心取整问题
+			}
+
+			if (target > arrays[mid]) {
+				min = mid + 1;
+			}
+
+			if (arrays[mid] == target) {
+				for (int x = 0; x < length; ++x) {
+					if (array[x] == arrays[mid]) {
+						return x;
+					}
+				}
+			}
+		}
+
+		return 0;
+	}
+
+	public static void main(String[] args) {
+		Mar2906 slt = new Mar2906();
+		int[] arrays = {50,49,48,47,46,45,44,43,42,41,40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1};
+		int target = 29;
+		System.out.println("length"+arrays.length);
+
+		for (int x : arrays) {
+			System.out.print(x + " ");
+		}
+		System.out.println();
+		System.out.println("target "+ target + ", index " + slt.sort(arrays, target));
+	}
+}
