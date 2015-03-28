@@ -2,7 +2,6 @@
 public class Myqueue<Item> {
 	private  int N;
 	private Node first;			//没有new不占空间
-	private Node oldlast;
 	private Node last;
 
 	private class Node{
