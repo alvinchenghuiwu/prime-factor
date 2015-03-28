@@ -1,0 +1,21 @@
+class Mar2905 {
+	public static void main(String[] args) {
+		int[] numbers = {5,2,3,1,4};
+
+		int length = numbers.length;
+		for (int i = 1; i < length; ++i) {
+			int key = numbers[i];
+
+			int j = i - 1;
+
+			while ((j >= 0) && (numbers[j] > key)) {
+				numbers[j+1] = numbers[j];
+				--j;
+			}
+
+			numbers[j+1] = key; 									//因为while最后循环还有一个--j所以要+1
+		}
+
+		System.out.print(numbers[0]+" "+numbers[1]+" "+numbers[2]+" "+numbers[3]+" "+numbers[4]+" ");
+	}
+}
