@@ -1,0 +1,53 @@
+class MergeSortTest {
+	static void mergeSort(int[] arrays){
+		int[] temp = new int[arrays.length];
+		internalmergeSort(arrays, temp, 0, arrays.length - 1);
+	}
+
+	static void internalmergeSort(int[] arrays, int[] temp, int low, int high){
+		if (low < high) {
+			int middle = (low + high)/2;			//防止多次创建middle造成内存。。。
+
+			internalmergeSort(arrays, temp, low, middle);
+			internalmergeSort(arrays, temp, middle+1, high);
+
+			mergeSortedArrays(arrays, temp, low, middle, high);
+		}
+	}
+
+	static void mergeSortedArrays(int[] arrays, int[] temp, int low, int middle,int high){
+		int x = low;
+		int y = middle+1;
+		int k = 0;
+
+		while(x<=middle && y<=high) {
+			if ( arrays[x] <= arrays[y]) {
+				temp[k++] = arrays[x++];
+			}else{
+				temp[k++] = arrays[y++];
+			}
+		}	
+
+		while (y<=high) {
+			temp[k++] = arrays[y++];
+		}
+		while(x<=middle){
+			temp[k++] = arrays[x++];
+		}
+		
+		for (int i=0; i<k; ++i) {            //此处不能等于造成ArrayIndexOutOfBoundsException
+			arrays[low+i] = temp[i];
+		}
+	}
+
+	public static void main(String[] args) {
+		int[] arrays = {5,4,3,2,1};
+		mergeSort(arrays);
+
+		for (int x : arrays) {
+			System.out.print(x + " ");
+		}
+	}
+		
+}
+
