@@ -1,0 +1,45 @@
+/*题目：有n个人围成一圈，顺序排号。从第一个人开始报数（从1到3报数），凡报到3的人退出圈子，问最后留下的是原来第几号的那位。 */
+import java.util.*;
+
+class Mar2803nPersonWeiChenQuan02{
+	public static void main(String[] args) {
+		int n = 100;
+
+		boolean[] tips = new boolean[n];
+		for (int i=0; i < n; ++i) {
+			tips[i] = true;
+		}
+
+		int leftCount = n;
+		int loopNumber = 0;
+		int index = 0;
+
+		while (leftCount > 1){
+
+			if (tips[index] == true) {
+				++loopNumber;
+			}
+
+			if (loopNumber == 3) {
+				loopNumber = 0;
+				tips[index] = false;
+				--leftCount;
+				System.out.print(index + " ");
+			}
+
+			++index;
+
+			if (index == n) {
+				index = 0;
+			}
+		}
+
+		for (int i=0; i < n; ++i) {
+			if (tips[i] == true) {
+				System.out.println();
+				System.out.print("Final Number: " + i);
+				break;
+			}
+		}
+	}
+}
