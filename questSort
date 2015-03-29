@@ -1,0 +1,45 @@
+class questSort{
+	static void questsort(int[] arrays){
+		int low = 0;
+		int high = arrays.length - 1;
+		questsort(arrays, low, high);
+	}
+
+	static void questsort(int[] arrays, int low, int high){
+		if (low < high) {
+			int pivot = qsort(arrays, low, high);
+			questsort(arrays, low, pivot - 1);
+			questsort(arrays, pivot + 1, high);
+		}
+	}
+
+	static  int qsort(int[] arrays, int low, int high){
+		int pivot = arrays[low];
+		
+		while (low < high) {
+			
+			while ((low < high) && (arrays[high] >= pivot)) {
+				--high;
+			}
+			arrays[low] = arrays[high];
+
+			while ((low < high) && (arrays[low] <= pivot)) {
+				++low;
+			}
+			arrays[high] = arrays[low];
+		}
+
+		arrays[low] = pivot;
+
+		return low;
+	}
+
+	public static void main(String[] args) {
+		int[] arrays = {5,4,3,2,1};
+		questsort(arrays);
+
+		for (int x : arrays) {
+			System.out.print(x + " ");
+		}
+	}
+}
