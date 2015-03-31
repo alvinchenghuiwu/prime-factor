@@ -1,0 +1,56 @@
+class EightQueen {
+	private static int count = 0;
+	private static final int QUEENNUMBER = 6;
+	private static  int[] rowsNum = new int[QUEENNUMBER];
+
+	EightQueenMar31(){
+
+		arangeEightQueen(0);	//构造方法可以直接调用本类方法
+		System.out.println(count);
+	}
+
+	public void arangeEightQueen(int n){
+		boolean[] rowsWhetherTrue = new boolean[QUEENNUMBER];
+		for (int i = 0; i < n; ++i) {
+			rowsWhetherTrue[rowsNum[i]] = true;
+
+			int delta = (n - i);
+			if (rowsNum[i] - delta >= 0) rowsWhetherTrue[rowsNum[i] - delta] = true;
+			if (rowsNum[i] + delta < QUEENNUMBER) rowsWhetherTrue[rowsNum[i] + delta] = true;
+		}
+
+		for (int i = 0; i < QUEENNUMBER; ++i) {
+			if (rowsWhetherTrue[i]) continue;
+
+			rowsNum[n] = i;
+
+			if (n < QUEENNUMBER - 1) {
+				arangeEightQueen(n+1);
+			}else {
+				++count;
+
+				printChessBorad(rowsNum);
+			}
+		}
+	}
+
+	public void printChessBorad(int[] rowsNum){
+		System.out.println("第"+count+"种方法");
+
+		for (int i = 0; i < QUEENNUMBER; ++i) {
+			for (int j = 0; j < QUEENNUMBER; ++j) {
+				if (j == rowsNum[i]) {
+					System.out.print("Q"+' ');
+				}else {
+					System.out.print("*"+' ');
+				}
+			}
+			System.out.println();
+		}
+		System.out.println();
+	}
+
+	public static void main(String[] args) {
+		EightQueenMar31 queen8 = new EightQueenMar31();
+	}
+}
