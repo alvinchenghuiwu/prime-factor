@@ -1,4 +1,4 @@
-class ShellDemo {
+class ShellSortTest {
 	static void shellSort( int [] arr){
 		int temp;
 		int count = 0;
