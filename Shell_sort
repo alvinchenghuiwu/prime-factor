@@ -1,0 +1,26 @@
+class ShellDemo {
+	static void shellSort( int [] arr){
+		int temp;
+		int count = 0;
+		for ( int delta = arr.length/ 2 ; delta>= 1 ; delta/= 2 ){         //对每个增量进行一次排序
+			for ( int i=delta; i<arr.length; i++){             
+				for ( int j=i; j>=delta && arr[j]<arr[j-delta]; j-=delta){ //注意每个地方增量和差值都是delta
+					temp = arr[j-delta];
+					arr[j-delta] = arr[j];
+					arr[j] = temp;
+					System.out.print((count++) +" ");
+				}
+			} //loop i
+		} //loop delta
+	}
+
+	public static void main(String[] args) {
+		int[] arrays = {9,8,7,6,5,4,3,2,1,0};
+		shellSort(arrays);
+
+		System.out.println();
+		for (int x : arrays) {
+			System.out.print(x + " ");
+		}
+	}
+	
