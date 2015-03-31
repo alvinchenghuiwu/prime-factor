@@ -5,11 +5,11 @@ class EightQueen {
 
 	EightQueenMar31(){
 
-		arangeEightQueen(0);	//构造方法可以直接调用本类方法
+		arangeEightQueen(0);	
 		System.out.println(count);
 	}
 
-	public void arangeEightQueen(int n){
+	void arangeEightQueen(int n){
 		boolean[] rowsWhetherTrue = new boolean[QUEENNUMBER];
 		for (int i = 0; i < n; ++i) {
 			rowsWhetherTrue[rowsNum[i]] = true;
@@ -34,7 +34,7 @@ class EightQueen {
 		}
 	}
 
-	public void printChessBorad(int[] rowsNum){
+	void printChessBorad(int[] rowsNum){
 		System.out.println("第"+count+"种方法");
 
 		for (int i = 0; i < QUEENNUMBER; ++i) {
